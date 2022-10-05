@@ -75,10 +75,10 @@ class UserRepositoryTest {
     public void checkUserPassword() {
 
         // given
-        User user = userRepository.findByMemberid("id1");
+        User user = userRepository.findByMemberid("test1");
 
         // then
-        assertThat(passwordEncoder.matches("pw1", user.getMemberpw())).isTrue();
+        assertThat(passwordEncoder.matches("test1", user.getMemberpw())).isTrue();
 
     }
 

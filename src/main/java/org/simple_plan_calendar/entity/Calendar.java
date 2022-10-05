@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @DynamicInsert
 @Table(name = "plan_calendar")
-@ToString(exclude = "plan_user")
+    @ToString(exclude = "user")
 public class Calendar extends BaseEntity {
 
     @Id
@@ -32,5 +32,5 @@ public class Calendar extends BaseEntity {
 
     private String bg_color;
 
-    private String text_color;
+    //private String text_color;
 }

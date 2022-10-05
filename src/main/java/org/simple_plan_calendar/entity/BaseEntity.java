@@ -19,7 +19,7 @@ abstract class BaseEntity {
 
     @CreatedDate
     @Column(name = "reg_date", updatable = false)
-    private LocalDateTime regDate;
+    private LocalDateTime reg_date;
 
     @ColumnDefault("'N'")
     private String del_flag;
