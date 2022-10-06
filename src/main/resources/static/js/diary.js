@@ -67,13 +67,17 @@ function checkNullEndDate(event) {
 
 // 일정 추가 이벤트
 function putDiaryInsert(dateValue, bg_color, text_color) {
-	$.ajax({
-		url:'model/putDiaryInsert.php',
-		dataType:'json',
-		async: false,
-		data:{"dateValue":dateValue, "bg_color":bg_color, "text_color":text_color},
-		success:function(data) {} 
-	});
+	if (!checkLogin()) {
+		alert("미로그인 상태에서는 반영되지 않습니다.");
+	} else {
+		$.ajax({
+			url:'model/putDiaryInsert.php',
+			dataType:'json',
+			async: false,
+			data:{"dateValue":dateValue, "bg_color":bg_color, "text_color":text_color},
+			success:function(data) {}
+		});
+	}
 
 	fullCalendarRefresh();
 	

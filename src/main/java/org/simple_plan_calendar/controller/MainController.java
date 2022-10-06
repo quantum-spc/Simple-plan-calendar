@@ -2,7 +2,6 @@ package org.simple_plan_calendar.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.simple_plan_calendar.dto.PageRequestDTO;
 import org.simple_plan_calendar.entity.User;
 import org.simple_plan_calendar.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class MainController {
 
 
     @GetMapping("/index")
-    public void index(PageRequestDTO pageRequestDTO, Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
+    public void index(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
         log.info("index page");
         log.info(loginUser);
 
@@ -62,8 +61,9 @@ public class MainController {
     }
 
     @PostMapping("/user/logout")
-    public String logoutUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
+    public String logoutUser(RedirectAttributes redirectAttributes, HttpSession session){
         session.invalidate();
+        redirectAttributes.addFlashAttribute("msg", "로그아웃에 성공했습니다.");
 
         return "redirect:/calendar/index";
     }
