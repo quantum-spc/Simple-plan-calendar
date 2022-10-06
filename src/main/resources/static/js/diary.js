@@ -39,13 +39,13 @@ function clickEvent(event, calEvent) {
 
 // 이동 이벤트
 function moveEvent(event) {
-	//console.log(event);
-
 	var seq = event["id"];
 	var startDate = event["start"]["_d"].toJSON();
 	var EndDate = checkNullEndDate(event);
+	var title = event["title"];
+	var color = event["color"];
 
-	putDiaryMoveUpdate(seq, startDate, EndDate);
+	putDiaryMoveUpdate(seq, startDate, EndDate, title, color);
 }
 
 // 리사이즈 이벤트
@@ -71,10 +71,12 @@ function putDiaryInsert(dateValue, bg_color, text_color) {
 		alert("미로그인 상태에서는 반영되지 않습니다.");
 	} else {
 		$.ajax({
-			url:'model/putDiaryInsert.php',
+			url:"/calendar/plan/insert",
+			method : 'POST',
 			dataType:'json',
 			async: false,
-			data:{"dateValue":dateValue, "bg_color":bg_color, "text_color":text_color},
+			contentType: 'application/json',
+			data:JSON.stringify({"start":dateValue, "title":"My Event", "color":bg_color}),
 			success:function(data) {}
 		});
 	}
@@ -84,11 +86,13 @@ function putDiaryInsert(dateValue, bg_color, text_color) {
 } // End of function
 
 // 일정 이동 이벤트
-function putDiaryMoveUpdate(seq, startDate, EndDate) {
+function putDiaryMoveUpdate(seq, startDate, EndDate, title, color) {
 	$.ajax({
-		url:'model/putDiaryMoveUpdate.php',
+		url:"/calendar/plan/update",
+		method : 'PUT',
 		dataType:'json',
-		data:{"seq":seq, "startDate":startDate, "EndDate":EndDate},
+		contentType: 'application/json',
+		data:JSON.stringify({"id":seq, "start":startDate, "end":EndDate, "title":title, "color":color}),
 		success:function(data) {} 
 	});
 } // End of function

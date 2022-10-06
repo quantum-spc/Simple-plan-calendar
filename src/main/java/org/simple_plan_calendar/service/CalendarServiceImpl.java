@@ -23,7 +23,7 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Override
     public Long registerUser(User user) {
-        log.info(user);
+        //log.info(user);
 
         User result = User.builder()
                 .memberid(user.getMemberid())
@@ -36,7 +36,7 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Override
     public Long loginUser(User user) {
-        log.info(user);
+        //log.info(user);
 
         User findUser = userRepository.findByMemberid(user.getMemberid());
 
@@ -51,7 +51,7 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public List<Calendar> getCalendarList(User user) {
+    public List<Calendar> calendarList(User user) {
         List<Calendar> calendarList = null;
         if (user != null) {
             calendarList = calendarRepository.findAllByUser(User.builder().id(user.getId()).build());
@@ -60,4 +60,30 @@ public class CalendarServiceImpl implements CalendarService {
 
         return calendarList;
     }
+    @Override
+    public void calendarInsert(User loginUser, Calendar calendar) {
+        Calendar result = Calendar.builder()
+                .user(loginUser)
+                .title(calendar.getTitle())
+                .start(calendar.getStart())
+                .color(calendar.getColor())
+                .build();
+
+        calendarRepository.save(result);
+    }
+
+    @Override
+    public void calendarUpdate(User loginUser, Calendar calendar) {
+        Calendar result = Calendar.builder()
+                .id(calendar.getId())
+                .user(loginUser)
+                .title(calendar.getTitle())
+                .start(calendar.getStart())
+                .end(calendar.getEnd())
+                .color(calendar.getColor())
+                .build();
+
+        calendarRepository.save(result);
+    }
+
 }

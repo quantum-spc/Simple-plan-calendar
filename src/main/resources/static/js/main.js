@@ -52,6 +52,7 @@ $(document).ready(function() {
 
 				var bg_color = $(this).attr("bg_color");
 				var text_color = $(this).attr("text_color");
+
 				putDiaryInsert(date["_d"].toJSON(), bg_color, text_color); // 일정 추가하기
 			}
 		},

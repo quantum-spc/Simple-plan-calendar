@@ -11,7 +11,11 @@ public interface CalendarService {
 
     Long loginUser(User user);
 
-    List<Calendar> getCalendarList(User user);
+    List<Calendar> calendarList(User user);
+
+    void calendarInsert(User loginUser, Calendar calendar);
+
+    void calendarUpdate(User loginUser, Calendar calendar);
 
 
 }
