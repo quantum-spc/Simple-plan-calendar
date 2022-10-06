@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/calendar/")
@@ -24,8 +27,11 @@ public class MainController {
 
 
     @GetMapping("/index")
-    public void index(PageRequestDTO pageRequestDTO, Model model){
+    public void index(PageRequestDTO pageRequestDTO, Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
         log.info("index page");
+        log.info(loginUser);
+
+        model.addAttribute("loginUser", loginUser);
     }
 
     @PostMapping("/user/register")
@@ -40,10 +46,24 @@ public class MainController {
     }
 
     @PostMapping("/user/login")
-    public String loginUser(User user, RedirectAttributes redirectAttributes){
+    public String loginUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
 
         boolean result = calendarService.loginUser(user);
-        System.out.println("result = " + result);
+
+        if (result) {
+            log.info("로그인 성공");
+            session.setAttribute("loginUser", user);
+        } else {
+            log.info("로그인 실패");
+            redirectAttributes.addFlashAttribute("msg", "로그인에 실패했습니다.");
+        }
+
+        return "redirect:/calendar/index";
+    }
+
+    @PostMapping("/user/logout")
+    public String logoutUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
+        session.invalidate();
 
         return "redirect:/calendar/index";
     }

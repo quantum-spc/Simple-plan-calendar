@@ -137,7 +137,7 @@ function userLogout() {
 	if (!confirm('로그아웃 하시겠습니까?')) return;
 
 	var formObj = document.loginForm;
-	formObj.action = "login.php";
+	formObj.action = "/calendar/user/logout";
 	formObj.submit();
 }
 
