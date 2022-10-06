@@ -7,7 +7,7 @@ import org.simple_plan_calendar.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -24,15 +24,15 @@ class CalendarRepositoryTest {
     @DisplayName("캘린더 등록 테스트")
     public void insertCalendar() {
 
-        User user = User.builder().memberid("userTest").build();
+        User user = User.builder().memberid("test1").build();
         userRepository.save(user);
 
         IntStream.rangeClosed(1,3).forEach(i -> {
             Calendar calendar = Calendar.builder()
                     .user(user)
                     .title("Title..."+i)
-                    .start_date(LocalDateTime.now())
-                    .bg_color("black")
+                    .start(LocalDate.now())
+                    .color("black")
                     .build();
 
             calendarRepository.save(calendar);

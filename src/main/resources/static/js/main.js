@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 	$('#calendar').fullCalendar({
 
-		events: 'model/getDiaryList.php',
+		events: '/calendar/plan/list',
 		firstDay: 0, // 0=일요일, 1=월요일
 		weekNumbers: false, // true일때 월(Month) 선택시 주차 표시, false 일경우 주차 표시 안함.
 		weekNumbersWithinDays: true,

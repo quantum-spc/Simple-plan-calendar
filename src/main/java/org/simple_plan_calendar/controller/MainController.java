@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.simple_plan_calendar.entity.User;
 import org.simple_plan_calendar.service.CalendarService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,25 +20,24 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class MainController {
 
-    @Autowired
     private final CalendarService calendarService;
-
 
     @GetMapping("/index")
     public void index(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
         log.info("index page");
-        log.info(loginUser);
+        //log.info(loginUser);
 
         model.addAttribute("loginUser", loginUser);
     }
 
     @PostMapping("/user/register")
-    public String registerUser(User user, RedirectAttributes redirectAttributes){
+    public String registerUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
 
         //새로 추가된 유저의 번호
         Long id = calendarService.registerUser(user);
-
         log.info("id : " + id);
+        user.setId(id);
+        session.setAttribute("loginUser", user);
 
         return "redirect:/calendar/index";
     }
@@ -47,14 +45,15 @@ public class MainController {
     @PostMapping("/user/login")
     public String loginUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
 
-        boolean result = calendarService.loginUser(user);
+        Long userId = calendarService.loginUser(user);
 
-        if (result) {
-            log.info("로그인 성공");
-            session.setAttribute("loginUser", user);
-        } else {
+        if (userId == 0L) {
             log.info("로그인 실패");
             redirectAttributes.addFlashAttribute("msg", "로그인에 실패했습니다.");
+        } else {
+            log.info("로그인 성공");
+            user.setId(userId);
+            session.setAttribute("loginUser", user);
         }
 
         return "redirect:/calendar/index";

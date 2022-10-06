@@ -2,11 +2,14 @@ package org.simple_plan_calendar.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.simple_plan_calendar.entity.Calendar;
 import org.simple_plan_calendar.entity.User;
 import org.simple_plan_calendar.repository.CalendarRepository;
 import org.simple_plan_calendar.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,16 +35,29 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public boolean loginUser(User user) {
+    public Long loginUser(User user) {
         log.info(user);
 
         User findUser = userRepository.findByMemberid(user.getMemberid());
 
-        boolean result = false;
+        Long result = 0L;
         if (findUser != null) {
-            result = passwordEncoder.matches(user.getMemberpw(), findUser.getMemberpw());
+            if (passwordEncoder.matches(user.getMemberpw(), findUser.getMemberpw())) {
+                result = findUser.getId();
+            }
         }
 
         return result;
+    }
+
+    @Override
+    public List<Calendar> getCalendarList(User user) {
+        List<Calendar> calendarList = null;
+        if (user != null) {
+            calendarList = calendarRepository.findAllByUser(User.builder().id(user.getId()).build());
+
+        }
+
+        return calendarList;
     }
 }

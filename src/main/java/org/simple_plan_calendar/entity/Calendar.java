@@ -1,10 +1,11 @@
 package org.simple_plan_calendar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Builder
@@ -21,16 +22,17 @@ public class Calendar extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private LocalDateTime start_date;
+    private LocalDate start; // 시작 날짜
 
-    private LocalDateTime end_date;
+    private LocalDate end; // 종료 날짜
 
-    private String title;
+    private String title; // 제목
 
-    private String bg_color;
+    private String color; // 배경 색깔
 
     //private String text_color;
 }
