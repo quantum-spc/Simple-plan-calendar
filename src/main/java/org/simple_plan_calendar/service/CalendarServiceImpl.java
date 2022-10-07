@@ -38,12 +38,12 @@ public class CalendarServiceImpl implements CalendarService {
     public Long loginUser(User user) {
         //log.info(user);
 
-        User findUser = userRepository.findByMemberid(user.getMemberid());
+        List<User> findUser = userRepository.findByMemberid(user.getMemberid());
 
         Long result = 0L;
-        if (findUser != null) {
-            if (passwordEncoder.matches(user.getMemberpw(), findUser.getMemberpw())) {
-                result = findUser.getId();
+        for(int i=0; i<findUser.size(); i++) {
+            if (passwordEncoder.matches(user.getMemberpw(), findUser.get(i).getMemberpw())) {
+                result = findUser.get(i).getId();
             }
         }
 

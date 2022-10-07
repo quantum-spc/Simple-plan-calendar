@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,11 +60,11 @@ class UserRepositoryTest {
 
         try {
             // when
-            User user = userRepository.findByMemberid(modifyUserTestId.getMemberid());
-            userRepository.save(user);
+            List<User> user = userRepository.findByMemberid(modifyUserTestId.getMemberid());
+            userRepository.save(user.get(0));
 
             // then
-            assertThat(modifyUserTestId.getId()).isEqualTo(user.getId());
+            assertThat(modifyUserTestId.getId()).isEqualTo(user.get(0).getId());
         } finally { // Exception 터지더라도 테스트로 생성한 계정은 삭제
             userRepository.delete(modifyUserTestId);
         }
@@ -75,10 +76,10 @@ class UserRepositoryTest {
     public void checkUserPassword() {
 
         // given
-        User user = userRepository.findByMemberid("test1");
+        List<User> user = userRepository.findByMemberid("test1");
 
         // then
-        assertThat(passwordEncoder.matches("test1", user.getMemberpw())).isTrue();
+        assertThat(passwordEncoder.matches("test1", user.get(0).getMemberpw())).isTrue();
 
     }
 

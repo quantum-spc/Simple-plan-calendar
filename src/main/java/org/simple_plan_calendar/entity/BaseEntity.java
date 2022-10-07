@@ -3,6 +3,7 @@ package org.simple_plan_calendar.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
@@ -17,11 +18,11 @@ import java.time.LocalDateTime;
 abstract class BaseEntity {
 
     @CreatedDate
-    @Column(name = "regDate", updatable = false)
-    private LocalDateTime regDate;
+    @Column(name = "regdate", updatable = false)
+    private LocalDateTime regdate;
 
-//    @LastModifiedDate
-//    @Column(name ="mod_date")
-//    private LocalDateTime modDate;
+    @LastModifiedDate
+    @Column(name ="moddate")
+    private LocalDateTime modDate;
 
-} 
+}
