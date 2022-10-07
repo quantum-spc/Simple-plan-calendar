@@ -2,6 +2,7 @@ package org.simple_plan_calendar.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -15,12 +16,15 @@ import java.time.LocalDate;
 @Setter
 @DynamicInsert
 @Table(name = "plan_calendar")
-    @ToString(exclude = "user")
+@ToString(exclude = "user")
 public class Calendar extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ColumnDefault("'N'")
+    private String delflag;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

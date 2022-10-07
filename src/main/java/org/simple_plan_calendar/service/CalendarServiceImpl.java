@@ -54,8 +54,7 @@ public class CalendarServiceImpl implements CalendarService {
     public List<Calendar> calendarList(User user) {
         List<Calendar> calendarList = null;
         if (user != null) {
-            calendarList = calendarRepository.findAllByUser(User.builder().id(user.getId()).build());
-
+            calendarList = calendarRepository.findAllByUserAndDelflag(User.builder().id(user.getId()).build(), "N");
         }
 
         return calendarList;
@@ -76,6 +75,7 @@ public class CalendarServiceImpl implements CalendarService {
     public void calendarUpdate(User loginUser, Calendar calendar) {
         Calendar result = Calendar.builder()
                 .id(calendar.getId())
+                .delflag(calendar.getDelflag())
                 .user(loginUser)
                 .title(calendar.getTitle())
                 .start(calendar.getStart())

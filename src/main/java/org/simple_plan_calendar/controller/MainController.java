@@ -62,7 +62,7 @@ public class MainController {
     @PostMapping("/user/logout")
     public String logoutUser(RedirectAttributes redirectAttributes, HttpSession session){
         session.invalidate();
-        redirectAttributes.addFlashAttribute("msg", "로그아웃에 성공했습니다.");
+        //redirectAttributes.addFlashAttribute("msg", "로그아웃에 성공했습니다.");
 
         return "redirect:/calendar/index";
     }

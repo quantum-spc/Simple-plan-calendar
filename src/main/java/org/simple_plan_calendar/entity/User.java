@@ -1,6 +1,7 @@
 package org.simple_plan_calendar.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -19,6 +20,9 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // id
+
+    @ColumnDefault("'N'")
+    private String delflag;
 
     private String memberid; // id
 

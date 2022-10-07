@@ -17,12 +17,20 @@ function checkLogin() {
 	return $("input[name=checkLogin]").val() ? true : false;
 }
 
+// endDate 널 체크
+function checkNullEndDate(event) {
+	return endDate = (event["end"]) ? event["end"]["_d"].toJSON() : null;
+}
+
 // 클릭 이벤트
 function clickEvent(event, calEvent) {
-	//console.log(event); console.log(calEvent);
+	//console.log(event);
+	//console.log(calEvent);
 
 	$('#titleValue').val(event.title);
 	$("input[name=eventId]").val(event.id);
+	$("input[name=eventStart]").val((event["start"] != null ? event["start"]["_d"].toJSON() : null));
+	$("input[name=eventEnd]").val((event["end"] != null ? event["end"]["_d"].toJSON() : null));
 	$('#fullCalModal').modal();
 
 	// 타이틀 색상 SELECT
@@ -34,36 +42,7 @@ function clickEvent(event, calEvent) {
 			$(this).removeAttr("selected");
 		}
 	});
-	
 }
-
-// 이동 이벤트
-function moveEvent(event) {
-	var seq = event["id"];
-	var startDate = event["start"]["_d"].toJSON();
-	var EndDate = checkNullEndDate(event);
-	var title = event["title"];
-	var color = event["color"];
-
-	putDiaryMoveUpdate(seq, startDate, EndDate, title, color);
-}
-
-// 리사이즈 이벤트
-function resizeEvent(event) {
-	//console.log(event);
-
-	var seq = event["id"];
-	var startDate = event["start"]["_d"].toJSON();
-	var EndDate = checkNullEndDate(event);
-
-	putDiaryResizeUpdate(seq, startDate, EndDate);
-}
-
-// endDate 널 체크
-function checkNullEndDate(event) {
-	return endDate = (event["end"]) ? event["end"]["_d"].toJSON() : null;
-}
-
 
 // 일정 추가 이벤트
 function putDiaryInsert(dateValue, bg_color, text_color) {
@@ -82,54 +61,67 @@ function putDiaryInsert(dateValue, bg_color, text_color) {
 	}
 
 	fullCalendarRefresh();
-	
 } // End of function
 
-// 일정 이동 이벤트
-function putDiaryMoveUpdate(seq, startDate, EndDate, title, color) {
+// 일정 이동
+function moveEvent(event) {
+	var seq = event["id"];
+	var startDate = event["start"]["_d"].toJSON();
+	var EndDate = checkNullEndDate(event);
+	var title = event["title"];
+	var color = event["color"];
+
+	putDiaryUpdate(seq, startDate, EndDate, title, color, "N");
+}
+
+// 일정 리사이즈
+function resizeEvent(event) {
+	//console.log(event);
+
+	var seq = event["id"];
+	var startDate = event["start"]["_d"].toJSON();
+	var EndDate = checkNullEndDate(event);
+	var title = event["title"];
+	var color = event["color"];
+
+	putDiaryUpdate(seq, startDate, EndDate, title, color, "N");
+}
+
+// 일정 수정
+function putTitleUpdate() {
+	var eventId = $("input[name=eventId]").val();
+	var title = $("input[name=titleValue]").val();
+	var colorSelect = $("select[name=colorSelect]").val();
+	var start = $("input[name=eventStart]").val();
+	var end = $("input[name=eventEnd]").val();
+
+	putDiaryUpdate(eventId, start, end, title, colorSelect, "N");
+}
+
+// 일정 삭제
+function putEventDelete(event) {
+	var seq = event["id"];
+	var startDate = event["start"]["_d"].toJSON();
+	var EndDate = checkNullEndDate(event);
+	var title = event["title"];
+	var color = event["color"];
+
+	putDiaryUpdate(seq, startDate, EndDate, title, color, "Y");
+}
+
+// 일정 업데이트 이벤트
+function putDiaryUpdate(seq, startDate, EndDate, title, color, delflag) {
 	$.ajax({
 		url:"/calendar/plan/update",
 		method : 'PUT',
-		dataType:'json',
 		contentType: 'application/json',
-		data:JSON.stringify({"id":seq, "start":startDate, "end":EndDate, "title":title, "color":color}),
-		success:function(data) {} 
-	});
-} // End of function
-
-// 일정 리사이즈 이벤트
-function putDiaryResizeUpdate(seq, startDate, EndDate) {
-	$.ajax({
-		url:'model/putDiaryResizeUpdate.php',
-		dataType:'json',
-		data:{"seq":seq, "startDate":startDate, "EndDate":EndDate},
-		success:function(data) {} 
-	});
-} // End of function
-
-
-// 일정 타이틀 수정
-function putTitleUpdate() {
-	var title = $("input[name=titleValue]").val();
-	var eventId = $("input[name=eventId]").val();
-	var colorSelect= $("select[name=colorSelect]").val();
-
-	$.ajax({
-		url:'model/putTitleUpdate.php',
-		async: false,
-		data:{"title":title, "seq":eventId, "colorSelect":colorSelect},
+		data:JSON.stringify({"id":seq, "start":startDate, "end":EndDate, "title":title, "color":color, "delflag":delflag}),
 		success:function(data) {
 			fullCalendarRefresh();
 			$('#fullCalModal').modal('hide');
-
-			if (!checkLogin()) {
-				alert("미로그인 상태에서는 반영되지 않습니다.");
-			}
-
-		} 
+		}
 	});
-	
-}
+} // End of function
 
 // 로그인
 function submitLogin() {

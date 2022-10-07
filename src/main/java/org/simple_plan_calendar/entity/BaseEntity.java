@@ -2,7 +2,6 @@ package org.simple_plan_calendar.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -18,14 +17,11 @@ import java.time.LocalDateTime;
 abstract class BaseEntity {
 
     @CreatedDate
-    @Column(name = "reg_date", updatable = false)
-    private LocalDateTime reg_date;
-
-    @ColumnDefault("'N'")
-    private String del_flag;
+    @Column(name = "regDate", updatable = false)
+    private LocalDateTime regDate;
 
 //    @LastModifiedDate
 //    @Column(name ="mod_date")
 //    private LocalDateTime modDate;
 
-}
+} 

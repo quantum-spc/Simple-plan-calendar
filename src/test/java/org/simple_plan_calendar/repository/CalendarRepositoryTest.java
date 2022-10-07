@@ -43,7 +43,7 @@ class CalendarRepositoryTest {
     @Test
     @DisplayName("캘린더 목록")
     public void testListByCalendar() {
-        List<Calendar> calendarList = calendarRepository.findAllByUser(User.builder().id(1L).build());
+        List<Calendar> calendarList = calendarRepository.findAllByUserAndDelflag(User.builder().id(1L).build(), "N");
 
         calendarList.forEach(
                 calendar -> System.out.println(calendar)

@@ -67,12 +67,8 @@ $(document).ready(function() {
 						revert: true, 
 						revertDuration: 0 
 					});
-						
-					$.ajax({
-						url:"model/putDiaryTrashDelete.php",
-						type:"post",
-						data:{"seq":event.id}
-					});
+
+					putEventDelete(event); // 일정 삭제
 
 					el.data('event', { title: event.title, id :event.id, stick: true });
 					

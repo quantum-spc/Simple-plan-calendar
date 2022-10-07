@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
 
-    List<Calendar> findAllByUser(User user);
+    List<Calendar> findAllByUserAndDelflag(User user, String delflag);
 }

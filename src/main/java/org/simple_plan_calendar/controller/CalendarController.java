@@ -42,7 +42,7 @@ public class CalendarController {
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Long> calendarUpdate(
+    public ResponseEntity<String> calendarUpdate(
             @SessionAttribute(name = "loginUser", required = false) User loginUser
             , @RequestBody Calendar calendar
     ){
@@ -50,6 +50,7 @@ public class CalendarController {
 
         calendarService.calendarUpdate(loginUser, calendar);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
+
 }
