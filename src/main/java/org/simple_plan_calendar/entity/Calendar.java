@@ -24,7 +24,7 @@ public class Calendar extends BaseEntity {
     private Long id;
 
     @ColumnDefault("'N'")
-    private String delflag;
+    private String delflag; // 삭제 여부
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

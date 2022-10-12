@@ -22,7 +22,7 @@ public class User extends BaseEntity {
     private Long id; // id
 
     @ColumnDefault("'N'")
-    private String delflag;
+    private String delflag; // 삭제 여부
 
     private String memberid; // id
 

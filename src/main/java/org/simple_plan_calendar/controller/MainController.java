@@ -22,6 +22,9 @@ public class MainController {
 
     private final CalendarService calendarService;
 
+    /**
+     * 메인 페이지
+     */
     @GetMapping("/index")
     public void index(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
         log.info("index page");
@@ -30,6 +33,9 @@ public class MainController {
         model.addAttribute("loginUser", loginUser);
     }
 
+    /**
+     * 유저 등록
+     */
     @PostMapping("/user/register")
     public String registerUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
 
@@ -42,6 +48,9 @@ public class MainController {
         return "redirect:/calendar/index";
     }
 
+    /**
+     * 유저 로그인
+     */
     @PostMapping("/user/login")
     public String loginUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
 
@@ -59,6 +68,9 @@ public class MainController {
         return "redirect:/calendar/index";
     }
 
+    /**
+     * 유저 로그아웃
+     */
     @PostMapping("/user/logout")
     public String logoutUser(RedirectAttributes redirectAttributes, HttpSession session){
         session.invalidate();

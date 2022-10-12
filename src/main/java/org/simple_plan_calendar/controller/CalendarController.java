@@ -20,6 +20,9 @@ public class CalendarController {
 
     private final CalendarService calendarService;
 
+    /**
+     * 일정 목록
+     */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Calendar>> calendarList(@SessionAttribute(name = "loginUser", required = false) User loginUser) {
         //log.info("loginUser ::: " + loginUser);
@@ -29,7 +32,11 @@ public class CalendarController {
         return new ResponseEntity<>( calendarList, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/insert")
+    /**
+     * 일정 등록
+     * @param calendar 일정
+     */
+    @PostMapping(value = "/")
     public ResponseEntity<Long> calendarInsert(
             @SessionAttribute(name = "loginUser", required = false) User loginUser
             , @RequestBody Calendar calendar
@@ -41,13 +48,18 @@ public class CalendarController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update")
+    /**
+     * 일정 업데이트
+     * @param calendar 일정
+     */
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<String> calendarUpdate(
             @SessionAttribute(name = "loginUser", required = false) User loginUser
+            , @PathVariable(name = "id") Long id
             , @RequestBody Calendar calendar
     ){
         //log.info(calendar);
-
+        calendar.setId(id);
         calendarService.calendarUpdate(loginUser, calendar);
 
         return new ResponseEntity<>("success", HttpStatus.OK);

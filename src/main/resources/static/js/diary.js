@@ -50,9 +50,8 @@ function putDiaryInsert(dateValue, bg_color, text_color) {
 		alert("미로그인 상태에서는 반영되지 않습니다.");
 	} else {
 		$.ajax({
-			url:"/calendar/plan/insert",
+			url:"/calendar/plan/",
 			method : 'POST',
-			dataType:'json',
 			async: false,
 			contentType: 'application/json',
 			data:JSON.stringify({"start":dateValue, "title":"My Event", "color":bg_color}),
@@ -112,10 +111,10 @@ function putEventDelete(event) {
 // 일정 업데이트 이벤트
 function putDiaryUpdate(seq, startDate, EndDate, title, color, delflag) {
 	$.ajax({
-		url:"/calendar/plan/update",
+		url:"/calendar/plan/update/"+seq,
 		method : 'PUT',
 		contentType: 'application/json',
-		data:JSON.stringify({"id":seq, "start":startDate, "end":EndDate, "title":title, "color":color, "delflag":delflag}),
+		data:JSON.stringify({"start":startDate, "end":EndDate, "title":title, "color":color, "delflag":delflag}),
 		success:function(data) {
 			fullCalendarRefresh();
 			$('#fullCalModal').modal('hide');
