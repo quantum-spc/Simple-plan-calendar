@@ -52,7 +52,7 @@ public class CalendarController {
      * 일정 업데이트
      * @param calendar 일정
      */
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<String> calendarUpdate(
             @SessionAttribute(name = "loginUser", required = false) User loginUser
             , @PathVariable(name = "id") Long id

@@ -111,7 +111,7 @@ function putEventDelete(event) {
 // 일정 업데이트 이벤트
 function putDiaryUpdate(seq, startDate, EndDate, title, color, delflag) {
 	$.ajax({
-		url:"/calendar/plan/update/"+seq,
+		url:"/calendar/plan/"+seq,
 		method : 'PUT',
 		contentType: 'application/json',
 		data:JSON.stringify({"start":startDate, "end":EndDate, "title":title, "color":color, "delflag":delflag}),
