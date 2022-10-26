@@ -47,7 +47,7 @@ function clickEvent(event, calEvent) {
 // 일정 추가 이벤트
 function putDiaryInsert(dateValue, bg_color, text_color) {
 	if (!checkLogin()) {
-		alert("미로그인 상태에서는 반영되지 않습니다.");
+		alert("로그인 하지 않은 상태에서는 반영되지 않습니다.");
 	} else {
 		$.ajax({
 			url:"/calendar/plan/",
@@ -118,6 +118,10 @@ function putDiaryUpdate(seq, startDate, EndDate, title, color, delflag) {
 		success:function(data) {
 			fullCalendarRefresh();
 			$('#fullCalModal').modal('hide');
+		}, error:function(e) {
+			if (e.status == 405) {
+				alert("로그인 하지 않은 상태에서는 반영되지 않습니다.");
+			}
 		}
 	});
 } // End of function
