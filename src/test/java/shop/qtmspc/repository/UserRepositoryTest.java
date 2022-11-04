@@ -1,8 +1,8 @@
-package org.simple_plan_calendar.repository;
+package shop.qtmspc.repository;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.simple_plan_calendar.entity.User;
+import shop.qtmspc.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;

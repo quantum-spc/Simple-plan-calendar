@@ -1,7 +1,7 @@
-package org.simple_plan_calendar.service;
+package shop.qtmspc.service;
 
-import org.simple_plan_calendar.entity.Calendar;
-import org.simple_plan_calendar.entity.User;
+import shop.qtmspc.entity.Calendar;
+import shop.qtmspc.entity.User;
 
 import java.util.List;
 

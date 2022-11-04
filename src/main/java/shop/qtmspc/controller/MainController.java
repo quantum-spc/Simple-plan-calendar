@@ -1,9 +1,9 @@
-package org.simple_plan_calendar.controller;
+package shop.qtmspc.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.simple_plan_calendar.entity.User;
-import org.simple_plan_calendar.service.CalendarService;
+import shop.qtmspc.entity.User;
+import shop.qtmspc.service.CalendarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +27,7 @@ public class MainController {
      */
     @GetMapping("/index")
     public void index(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
-        log.info("index page");
+        //log.info("index page");
         //log.info(loginUser);
 
         model.addAttribute("loginUser", loginUser);

@@ -1,11 +1,11 @@
-package org.simple_plan_calendar.service;
+package shop.qtmspc.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.simple_plan_calendar.entity.Calendar;
-import org.simple_plan_calendar.entity.User;
-import org.simple_plan_calendar.repository.CalendarRepository;
-import org.simple_plan_calendar.repository.UserRepository;
+import shop.qtmspc.entity.Calendar;
+import shop.qtmspc.entity.User;
+import shop.qtmspc.repository.CalendarRepository;
+import shop.qtmspc.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

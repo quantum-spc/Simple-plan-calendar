@@ -1,10 +1,10 @@
-package org.simple_plan_calendar.controller;
+package shop.qtmspc.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.simple_plan_calendar.entity.Calendar;
-import org.simple_plan_calendar.entity.User;
-import org.simple_plan_calendar.service.CalendarService;
+import shop.qtmspc.entity.Calendar;
+import shop.qtmspc.entity.User;
+import shop.qtmspc.service.CalendarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

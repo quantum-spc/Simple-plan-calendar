@@ -1,4 +1,4 @@
-package org.simple_plan_calendar;
+package shop.qtmspc;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

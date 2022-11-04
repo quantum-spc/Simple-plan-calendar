@@ -1,7 +1,7 @@
-package org.simple_plan_calendar.repository;
+package shop.qtmspc.repository;
 
-import org.simple_plan_calendar.entity.Calendar;
-import org.simple_plan_calendar.entity.User;
+import shop.qtmspc.entity.Calendar;
+import shop.qtmspc.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

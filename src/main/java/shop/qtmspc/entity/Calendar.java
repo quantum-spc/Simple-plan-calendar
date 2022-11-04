@@ -1,4 +1,4 @@
-package org.simple_plan_calendar.entity;
+package shop.qtmspc.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
