@@ -2,7 +2,6 @@ package shop.qtmspc;
 
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -31,7 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
      * 로그인 체크 필터 세팅 (프론트 컨트롤러 호출전에 호출)
      * 로그인을 하지 않고 호출하는 비즈니스 로직은 무시하도록 처리
      */
-    @Bean
+    //@Bean
     public FilterRegistrationBean loginCheckFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new LoginCheckFilter());
