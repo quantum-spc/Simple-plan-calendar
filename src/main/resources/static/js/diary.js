@@ -3,6 +3,13 @@ function startApplycation() {
 	
 }
 
+// 테스트 계정 사용
+function loginTestUser() {
+	$("input[name=memberid]").val("test");
+	$("input[name=memberpw]").val("test");
+	submitLogin();
+}
+
 // 캘린더 갱신
 function fullCalendarRefresh() {
 
@@ -158,13 +165,13 @@ function submitRegister() {
 function checkLoginInput() {
 	if (!$("input[name=memberid]").val()) {
 		alert("아이디를 입력해주세요.");
-		$("input[name=username]").focus();
+		$("input[name=memberid]").focus();
 		return;
 	}
 
 	if (!$("input[name=memberpw]").val()) {
 		alert("비밀번호를 입력해주세요.");
-		$("input[name=password]").focus();
+		$("input[name=memberpw]").focus();
 		return;
 	}
 

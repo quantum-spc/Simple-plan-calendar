@@ -103,10 +103,10 @@
 			<form method="POST" name="loginForm">
 				<div id="modalBody" class="modal-body">
 					<div>
-						<input type="text" class="form-control" name="memberid" placeholder="Username" value="test" required autofocus />
+						<input type="text" class="form-control" name="memberid" placeholder="Username" value="" required />
 					</div>
 					<div>
-						<input type="password" class="form-control" name="memberpw" placeholder="Password" value="test" onkeypress="if (event.keyCode == 13) submitLogin();" required>
+						<input type="password" class="form-control" name="memberpw" placeholder="Password" value="" onkeypress="if (event.keyCode == 13) submitLogin();" required>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -115,6 +115,9 @@
 					</div>
 					<div style="margin-top:5px">
 						<button type="button" class="form-control btn btn-success" onclick="javascript:submitRegister();">Register</button>
+					</div>
+					<div style="margin-top:5px">
+						<button type="button" class="form-control btn btn-warning" onclick="javascript:loginTestUser();">Use test account</button>
 					</div>
 				</div>
 			</form>
