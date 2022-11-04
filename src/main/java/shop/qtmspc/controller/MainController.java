@@ -40,11 +40,19 @@ public class MainController {
     @PostMapping("/user/register")
     public String registerUser(User user, RedirectAttributes redirectAttributes, HttpSession session){
 
-        //새로 추가된 유저의 번호
-        Long id = calendarService.registerUser(user);
-        log.info("id : " + id);
-        user.setId(id);
-        session.setAttribute(WebConfig.LOGIN_USER, user);
+        Long userId = calendarService.loginUser(user);
+
+        if (userId == 0) {
+            //새로 추가된 유저의 번호
+            Long id = calendarService.registerUser(user);
+            log.info("id : " + id);
+            user.setId(id);
+            session.setAttribute(WebConfig.LOGIN_USER, user);
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "이미 존재하는 계정입니다. 다른 아이디로 등록하세요.");
+        }
+
+
 
         return "redirect:/calendar/index";
     }
