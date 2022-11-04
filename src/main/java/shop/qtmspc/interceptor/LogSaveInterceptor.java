@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Slf4j
-public class LogInterceptor implements HandlerInterceptor  {
+public class LogSaveInterceptor implements HandlerInterceptor  {
 
     public static final String LOG_ID = "logId";
 
@@ -21,9 +21,8 @@ public class LogInterceptor implements HandlerInterceptor  {
         String uuid = UUID.randomUUID().toString();
         request.setAttribute(LOG_ID, uuid);
 
-        //if (requestURI.contains("/calendar")) {
-            log.info("[{}][{}][{}][{}]", uuid, request.getDispatcherType(), requestURI, handler);
-        //}
+        log.info("[{}][{}][{}][{}]", uuid, request.getDispatcherType(), requestURI, handler);
+
         return true;
     }
 

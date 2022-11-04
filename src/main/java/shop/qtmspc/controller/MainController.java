@@ -1,9 +1,7 @@
 package shop.qtmspc.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
-import shop.qtmspc.entity.User;
-import shop.qtmspc.service.CalendarService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import shop.qtmspc.entity.User;
+import shop.qtmspc.service.CalendarService;
 
 import javax.servlet.http.HttpSession;
 
+@Slf4j
 @Controller
 @RequestMapping("/calendar/")
-@Log4j2
 @RequiredArgsConstructor
 public class MainController {
 
