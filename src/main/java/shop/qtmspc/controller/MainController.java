@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import shop.qtmspc.WebConfig;
 import shop.qtmspc.entity.User;
 import shop.qtmspc.service.CalendarService;
 
@@ -26,11 +27,11 @@ public class MainController {
      * 메인 페이지
      */
     @GetMapping("/index")
-    public void index(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
+    public void index(Model model, @SessionAttribute(name = WebConfig.LOGIN_USER, required = false) User loginUser){
         //log.info("index page");
         //log.info(loginUser);
 
-        model.addAttribute("loginUser", loginUser);
+        model.addAttribute(WebConfig.LOGIN_USER, loginUser);
     }
 
     /**
@@ -43,7 +44,7 @@ public class MainController {
         Long id = calendarService.registerUser(user);
         log.info("id : " + id);
         user.setId(id);
-        session.setAttribute("loginUser", user);
+        session.setAttribute(WebConfig.LOGIN_USER, user);
 
         return "redirect:/calendar/index";
     }
@@ -62,7 +63,7 @@ public class MainController {
         } else {
             log.info("로그인 성공");
             user.setId(userId);
-            session.setAttribute("loginUser", user);
+            session.setAttribute(WebConfig.LOGIN_USER, user);
         }
 
         return "redirect:/calendar/index";

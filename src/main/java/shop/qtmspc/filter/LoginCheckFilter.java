@@ -2,6 +2,7 @@ package shop.qtmspc.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.PatternMatchUtils;
+import shop.qtmspc.WebConfig;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,6 @@ import java.io.IOException;
 public class LoginCheckFilter implements Filter {
 
     private static final String[] whitelist = {"/", "/calendar/index", "/calendar/user/login", "/calendar/logout", "/calendar/plan/list", "/css/*", "/js/*"};
-
-    public static final String LOGIN_MEMBER = "loginUser";
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -30,7 +29,7 @@ public class LoginCheckFilter implements Filter {
             if (isLoginCheckPath(requestURI)) {
                 //log.info("인증 체크 로직 실행 {}", requestURI);
                 HttpSession session = httpRequest.getSession(false);
-                if (session == null || session.getAttribute(LOGIN_MEMBER) == null) {
+                if (session == null || session.getAttribute(WebConfig.LOGIN_USER) == null) {
 
                     log.info("로그인 하지 않은 사용자의 요청 {}", requestURI);
                     //로그인으로 redirect

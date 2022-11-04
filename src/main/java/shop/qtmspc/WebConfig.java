@@ -14,6 +14,8 @@ import javax.servlet.Filter;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    public static final String LOGIN_USER = "loginUser";
+
     /**
      * 로그 인터셉터 세팅
      */
