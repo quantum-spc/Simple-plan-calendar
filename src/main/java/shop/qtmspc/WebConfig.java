@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
     public static final String LOGIN_USER = "loginUser";
 
     /**
-     * 로그 인터셉터 세팅
+     * 로그 인터셉터 세팅 (핸들러 호출전에 호출)
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -28,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 로그인 체크 필터 세팅
+     * 로그인 체크 필터 세팅 (프론트 컨트롤러 호출전에 호출)
      * 로그인을 하지 않고 호출하는 비즈니스 로직은 무시하도록 처리
      */
     @Bean
