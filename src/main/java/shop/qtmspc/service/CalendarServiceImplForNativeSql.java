@@ -3,19 +3,20 @@ package shop.qtmspc.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import shop.qtmspc.entity.Calendar;
 import shop.qtmspc.entity.User;
 import shop.qtmspc.repository.CalendarRepository;
-import shop.qtmspc.repository.UserRepositoryForJpql;
+import shop.qtmspc.repository.UserRepositoryForNativeSql;
 
 import java.util.List;
 
-//@Service
+@Service
 @RequiredArgsConstructor
 @Log4j2
-public class CalendarServiceImplForJpql implements CalendarService {
+public class CalendarServiceImplForNativeSql implements CalendarService {
 
-    private final UserRepositoryForJpql userRepositoryForJpql;
+    private final UserRepositoryForNativeSql userRepositoryForNativeSql;
     private final CalendarRepository calendarRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -28,7 +29,7 @@ public class CalendarServiceImplForJpql implements CalendarService {
                 .memberid(user.getMemberid())
                 .memberpw(passwordEncoder.encode(user.getMemberpw()))
                 .build();
-        userRepositoryForJpql.save(result);
+        userRepositoryForNativeSql.save(result);
 
         return result.getId();
     }
@@ -37,7 +38,8 @@ public class CalendarServiceImplForJpql implements CalendarService {
     public Long loginUser(User user) {
         //log.info(user);
 
-        List<User> findUser = userRepositoryForJpql.findByMemberid(user.getMemberid());
+        List<User> findUser = userRepositoryForNativeSql.findByMemberid(user.getMemberid());
+        System.out.println("findUser = " + findUser);
 
         Long result = 0L;
         for(int i=0; i<findUser.size(); i++) {
