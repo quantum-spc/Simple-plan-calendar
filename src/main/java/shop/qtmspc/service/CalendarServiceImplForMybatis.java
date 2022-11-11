@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import shop.qtmspc.entity.Calendar;
 import shop.qtmspc.entity.User;
+import shop.qtmspc.mapper.BoardMapper;
 import shop.qtmspc.repository.CalendarRepository;
 import shop.qtmspc.repository.UserRepository;
 
@@ -18,8 +19,10 @@ import java.util.List;
 @Log4j2
 public class CalendarServiceImplForMybatis implements CalendarService {
 
-    private final UserRepository userRepository;
-    private final CalendarRepository calendarRepository;
+    private final UserRepository userRepository; // jpa
+    private final CalendarRepository calendarRepository; // jpa
+
+    private final BoardMapper boardMapper; // MyBatis. Mapper
 
     private final PasswordEncoder passwordEncoder;
 
@@ -43,7 +46,7 @@ public class CalendarServiceImplForMybatis implements CalendarService {
     public Long loginUser(User user) {
         //log.info(user);
 
-        List<User> findUser = mybatisSqlSession.selectList("userSQL.findByMemberid", user);
+        List<User> findUser = boardMapper.findByMemberid(user);
         log.info("findUser : {}", findUser.toString());
 
         Long result = 0L;
