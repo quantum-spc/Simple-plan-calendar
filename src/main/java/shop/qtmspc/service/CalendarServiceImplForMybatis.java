@@ -2,23 +2,29 @@ package shop.qtmspc.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import shop.qtmspc.entity.Calendar;
 import shop.qtmspc.entity.User;
 import shop.qtmspc.repository.CalendarRepository;
-import shop.qtmspc.repository.UserRepositoryForNativeSql;
+import shop.qtmspc.repository.UserRepository;
 
 import java.util.List;
 
-//@Service
+@Service
 @RequiredArgsConstructor
 @Log4j2
-public class CalendarServiceImplForNativeSql implements CalendarService {
+public class CalendarServiceImplForMybatis implements CalendarService {
 
-    private final UserRepositoryForNativeSql userRepositoryForNativeSql;
+    private final UserRepository userRepository;
     private final CalendarRepository calendarRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SqlSession mybatisSqlSession;
 
     @Override
     public Long registerUser(User user) {
@@ -28,7 +34,7 @@ public class CalendarServiceImplForNativeSql implements CalendarService {
                 .memberid(user.getMemberid())
                 .memberpw(passwordEncoder.encode(user.getMemberpw()))
                 .build();
-        userRepositoryForNativeSql.save(result);
+        userRepository.save(result);
 
         return result.getId();
     }
@@ -37,7 +43,8 @@ public class CalendarServiceImplForNativeSql implements CalendarService {
     public Long loginUser(User user) {
         //log.info(user);
 
-        List<User> findUser = userRepositoryForNativeSql.findByMemberid(user.getMemberid());
+        List<User> findUser = mybatisSqlSession.selectList("userSQL.findByMemberid", user);
+        log.info("findUser : {}", findUser.toString());
 
         Long result = 0L;
         for(int i=0; i<findUser.size(); i++) {

@@ -1,11 +1,12 @@
 package shop.qtmspc.repository;
 
+import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import shop.qtmspc.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import shop.qtmspc.entity.User;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -20,6 +21,9 @@ class UserRepositoryTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SqlSession mybatisSqlSession;
 
     @Test
     @DisplayName("비밀번호 암호화 테스트")
@@ -80,6 +84,15 @@ class UserRepositoryTest {
 
         // then
         assertThat(passwordEncoder.matches("test", user.get(0).getMemberpw())).isTrue();
+    }
+
+    @Test
+    @DisplayName("mybatis select 테스트")
+    public void testMybatisSelect() {
+        User user = new User();
+        user.setMemberid("test");
+        List<User> result = mybatisSqlSession.selectList("userSQL.findByMemberid", user);
+        System.out.println(result.toString());
 
     }
 
