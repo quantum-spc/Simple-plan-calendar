@@ -31,6 +31,7 @@ public class CalendarServiceImplForMybatis implements CalendarService {
     private SqlSession mybatisSqlSession;
 
     @Override
+    @Transactional
     public Long registerUser(User user) {
         //log.info(user);
 
@@ -39,6 +40,7 @@ public class CalendarServiceImplForMybatis implements CalendarService {
                 .memberpw(passwordEncoder.encode(user.getMemberpw()))
                 .build();
         userRepository.save(result);
+        userMapper.updateUserLastLoginDate(user);
 
         return result.getId();
     }
