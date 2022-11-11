@@ -6,9 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import shop.qtmspc.entity.Calendar;
 import shop.qtmspc.entity.User;
-import shop.qtmspc.mapper.BoardMapper;
+import shop.qtmspc.mapper.UserMapper;
 import shop.qtmspc.repository.CalendarRepository;
 import shop.qtmspc.repository.UserRepository;
 
@@ -22,7 +23,7 @@ public class CalendarServiceImplForMybatis implements CalendarService {
     private final UserRepository userRepository; // jpa
     private final CalendarRepository calendarRepository; // jpa
 
-    private final BoardMapper boardMapper; // MyBatis. Mapper
+    private final UserMapper userMapper; // MyBatis. Mapper
 
     private final PasswordEncoder passwordEncoder;
 
@@ -43,16 +44,18 @@ public class CalendarServiceImplForMybatis implements CalendarService {
     }
 
     @Override
+    @Transactional
     public Long loginUser(User user) {
         //log.info(user);
 
-        List<User> findUser = boardMapper.findByMemberid(user);
+        List<User> findUser = userMapper.findByMemberid(user);
         log.info("findUser : {}", findUser.toString());
 
         Long result = 0L;
         for(int i=0; i<findUser.size(); i++) {
             if (passwordEncoder.matches(user.getMemberpw(), findUser.get(i).getMemberpw())) {
                 result = findUser.get(i).getId();
+                userMapper.updateUserLastLoginDate(user);
             }
         }
 
@@ -69,6 +72,7 @@ public class CalendarServiceImplForMybatis implements CalendarService {
         return calendarList;
     }
     @Override
+    @Transactional
     public void calendarInsert(User loginUser, Calendar calendar) {
         Calendar result = Calendar.builder()
                 .user(loginUser)
@@ -81,6 +85,7 @@ public class CalendarServiceImplForMybatis implements CalendarService {
     }
 
     @Override
+    @Transactional
     public void calendarUpdate(User loginUser, Calendar calendar) {
         Calendar result = Calendar.builder()
                 .id(calendar.getId())

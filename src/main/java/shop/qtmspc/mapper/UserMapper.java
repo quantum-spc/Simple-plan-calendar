@@ -6,8 +6,10 @@ import shop.qtmspc.entity.User;
 import java.util.List;
 
 @Mapper
-public interface BoardMapper {
+public interface UserMapper {
 
-    public List<User> findByMemberid(User user);
+    List<User> findByMemberid(User user);
+
+    void updateUserLastLoginDate(User user);
 
 }

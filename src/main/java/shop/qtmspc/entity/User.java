@@ -5,6 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -27,5 +28,7 @@ public class User extends BaseEntity {
     private String memberid; // id
 
     private String memberpw; // 비밀번호
+
+    private LocalDateTime lastLoginDate; // 마지막 로그인 날짜
 
 }

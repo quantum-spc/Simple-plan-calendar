@@ -128,6 +128,9 @@ function putDiaryUpdate(seq, startDate, EndDate, title, color, delflag) {
 		}, error:function(e) {
 			if (e.status == 405) {
 				alert("로그인 하지 않은 상태에서는 반영되지 않습니다.");
+			} else {
+				alert("에러가 발생하였습니다. 관리자에게 문의 바랍니다.");
+				fullCalendarRefresh();
 			}
 		}
 	});
