@@ -1,7 +1,7 @@
 package shop.qtmspc.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import shop.qtmspc.entity.Calendar;
 import shop.qtmspc.entity.User;
@@ -12,7 +12,7 @@ import java.util.List;
 
 //@Service
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class CalendarServiceImpl implements CalendarService {
 
     private final UserRepository userRepository;

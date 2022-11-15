@@ -2,6 +2,7 @@ package shop.qtmspc.repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootTest
+@Slf4j
 class CalendarRepositoryTest {
 
     @Autowired
@@ -53,7 +55,7 @@ class CalendarRepositoryTest {
         List<Calendar> calendarList = calendarRepository.findAllByUserAndDelflag(User.builder().id(1L).build(), "N");
 
         calendarList.forEach(
-                calendar -> System.out.println(calendar)
+                calendar -> log.info(calendar.toString())
         );
 
     }
@@ -72,7 +74,7 @@ class CalendarRepositoryTest {
         Page<Calendar> result = calendarRepository.findAll(builder, pageable);
 
         result.stream().forEach(calendar -> {
-            System.out.println(calendar);
+            log.info(calendar.toString());
         });
     }
 

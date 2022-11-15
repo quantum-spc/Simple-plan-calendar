@@ -1,5 +1,6 @@
 package shop.qtmspc.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import shop.qtmspc.entity.User;
+import shop.qtmspc.mapper.UserMapper;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -14,6 +16,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Slf4j
 class UserRepositoryTest {
 
     @Autowired
@@ -24,6 +27,9 @@ class UserRepositoryTest {
 
     @Autowired
     private SqlSession mybatisSqlSession;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     @DisplayName("비밀번호 암호화 테스트")
@@ -91,8 +97,9 @@ class UserRepositoryTest {
     public void testMybatisSelect() {
         User user = new User();
         user.setMemberid("test");
-        List<User> result = mybatisSqlSession.selectList("userSQL.findByMemberid", user);
-        System.out.println(result.toString());
+        List<User> result = userMapper.findByMemberid(user);
+        log.info("result : {}", result.toString());
+        assertThat(user.getMemberid()).isEqualTo(result.get(0).getMemberid());
 
     }
 
