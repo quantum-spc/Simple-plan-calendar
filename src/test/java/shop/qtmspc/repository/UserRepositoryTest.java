@@ -25,8 +25,9 @@ class UserRepositoryTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private SqlSession mybatisSqlSession;
+    // 다른 데이터베이스간의 트랜잭션 테스트
+    //@Autowired
+    //private SqlSession mybatisSqlSession;
 
     @Autowired
     private UserMapper userMapper;
