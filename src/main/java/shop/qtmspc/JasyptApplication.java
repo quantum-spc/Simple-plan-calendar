@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * 암호화 텍스트 생성 APP
+ * 패스워드 생성할경우 @Value 값을 사용해야 하기 때문에 @SpringBootApplication 주석을 해제하여 비밀번호를 생성
  */
 //@SpringBootApplication
 @PropertySource("classpath:jasyptPassword.properties")
