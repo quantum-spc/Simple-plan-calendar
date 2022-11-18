@@ -1,14 +1,14 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'org.springframework.boot' version '2.7.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'war'
-    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10' // querydsl
 }
 
 group = 'shop.qtmspc'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '8'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -38,8 +38,10 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
 
+    implementation 'com.querydsl:querydsl-jpa:5.0.0' // querydsl
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0' // querydsl
+
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time' // 타임리프
-    implementation 'com.querydsl:querydsl-jpa' // querydsl
     implementation 'mysql:mysql-connector-java' // mysql
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security' // 비밀번호 암호화
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' // Jasypt // 데이터베이스 접속정보 암호화
@@ -51,21 +53,19 @@ test {
     useJUnitPlatform()
 }
 
+// querydsl 세팅 시작
 def querydslDir = "$buildDir/generated/querydsl"
-
 querydsl {
     jpa = true
     querydslSourcesDir = querydslDir
 }
-
 sourceSets {
     main.java.srcDir querydslDir
 }
-
 configurations {
     querydsl.extendsFrom compileClasspath
 }
-
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
+// querydsl 세팅 끝

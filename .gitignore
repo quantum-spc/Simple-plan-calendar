@@ -34,5 +34,4 @@ out/
 .vscode/
 #src/main/resources/application.properties
 src/main/resources/jasyptPassword.properties
-gradle/
 out/
