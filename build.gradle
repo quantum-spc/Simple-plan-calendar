@@ -28,7 +28,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
@@ -36,12 +35,13 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation 'org.springframework.security:spring-security-test'
     compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
-    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
-    implementation 'com.querydsl:querydsl-jpa'
 
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time' // 타임리프
+    implementation 'com.querydsl:querydsl-jpa' // querydsl
     implementation 'mysql:mysql-connector-java' // mysql
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.7.5' // 비밀번호 암호화
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security' // 비밀번호 암호화
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' // Jasypt // 데이터베이스 접속정보 암호화
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2' // mybatis
     compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16' // log4j2
