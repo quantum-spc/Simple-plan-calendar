@@ -1,6 +1,5 @@
 package shop.qtmspc.repository;
 
-import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Slf4j
 class UserRepositoryTest {
 
     @Autowired
@@ -99,7 +97,7 @@ class UserRepositoryTest {
         User user = new User();
         user.setMemberid("test");
         List<User> result = userMapper.findByMemberid(user);
-        log.info("result : {}", result.toString());
+        System.out.println(result.toString());
         assertThat(user.getMemberid()).isEqualTo(result.get(0).getMemberid());
 
     }
