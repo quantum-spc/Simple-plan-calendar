@@ -25,22 +25,22 @@ class DBConnectionTest {
     @Test
     @DisplayName("데이터베이스 연결 테스트")
     void connection() {
-        String resultText = "fail";
+        boolean result = false;
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             if (connection != null) {
                 System.out.println("connection = " + connection);
-                resultText = "success";
+                result = true;
             }
         } catch(Exception e) {
             System.out.println("e = " + e);
             if (e.toString().contains("max_user_connections")) { // 최대 연결 허용수 제한으로 나오지만 정상
-                resultText = "success";
+                result = true;
             } else {
                 System.out.println("커넥션 연결 실패");
             }
         }
-        assertThat(resultText).isEqualTo("success");
+        assertThat(result).isEqualTo(true);
         
     }
 }
