@@ -54,13 +54,17 @@ public class CalendarServiceImplForMybatis implements CalendarService {
         log.info("findUser : {}", findUser.toString());
 
         Long result = 0L;
-        for(int i=0; i<findUser.size(); i++) {
-            if (passwordEncoder.matches(user.getMemberpw(), findUser.get(i).getMemberpw())) {
-                result = findUser.get(i).getId();
-                userMapper.updateUserLastLoginDate(user);
-            }
-        }
 
+        try {
+            for(int i=0; i<findUser.size(); i++) {
+                if (passwordEncoder.matches(user.getMemberpw(), findUser.get(i).getMemberpw())) {
+                    result = findUser.get(i).getId();
+                    userMapper.updateUserLastLoginDate(user);
+                }
+            }
+        } catch(Exception e) {
+            log.info("loginUser Exception : {}", e);
+        }
         return result;
     }
 
