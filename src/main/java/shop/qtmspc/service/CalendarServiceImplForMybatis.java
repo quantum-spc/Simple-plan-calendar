@@ -56,9 +56,9 @@ public class CalendarServiceImplForMybatis implements CalendarService {
         Long result = 0L;
 
         try {
-            for(int i=0; i<findUser.size(); i++) {
-                if (passwordEncoder.matches(user.getMemberpw(), findUser.get(i).getMemberpw())) {
-                    result = findUser.get(i).getId();
+            for (User value : findUser) {
+                if (passwordEncoder.matches(user.getMemberpw(), value.getMemberpw())) {
+                    result = value.getId();
                     userMapper.updateUserLastLoginDate(user);
                 }
             }
