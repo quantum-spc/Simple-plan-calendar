@@ -1,5 +1,6 @@
 package shop.qtmspc.database;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import java.sql.DriverManager;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Slf4j
 class DBConnectionTest {
 
     @Value("${spring.datasource.url}")
@@ -29,7 +31,7 @@ class DBConnectionTest {
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             if (connection != null) {
-                System.out.println("connection = " + connection);
+                log.info("connection = {}", connection);
                 result = true;
             }
         } catch(Exception e) {
