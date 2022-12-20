@@ -36,18 +36,18 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.springframework.security:spring-security-test'
-    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
 
     implementation 'com.querydsl:querydsl-jpa:5.0.0' // querydsl
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0' // querydsl
 
-    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time' // 타임리프
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time' // 타임리프
     implementation 'mysql:mysql-connector-java' // mysql
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security' // 비밀번호 암호화
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' // Jasypt // 데이터베이스 접속정보 암호화
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2' // mybatis
-    compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16' // log4j2
-    testCompile('org.projectlombok:lombok') // 테스트에서 롬복 사용
+    implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16' // log4j2
+    testImplementation('org.projectlombok:lombok') // 테스트에서 롬복 사용
     testAnnotationProcessor('org.projectlombok:lombok') // 테스트에서 롬복 사용
     implementation 'io.jsonwebtoken:jjwt:0.9.1' // jwt
 }
