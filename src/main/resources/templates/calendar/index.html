@@ -20,6 +20,9 @@
 	<script th:src='@{/js/main.js}'></script>
 	<script th:src='@{/js/diary.js}'></script>
 
+	<!-- day js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+
 	<script th:inline="javascript">
 		var msg = [[${msg}]];
 		if (msg != null) alert(msg);
