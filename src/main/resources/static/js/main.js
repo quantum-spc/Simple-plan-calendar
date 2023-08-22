@@ -105,18 +105,23 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-	/** 수정 모드에서 포커스 기능 */
+	// 수정 모드에서 포커스 기능
 	$('#fullCalModal').on('shown.bs.modal', function () {
 	    $('#titleValue').focus();
 	});
 
-	/** 새로고침 */
+	// 새로고침
 	$('.fc-center').click(function () {
 		location.reload();
 	});
 
-	/** 날짜클릭 기능 삭제 */
+	// 날짜클릭 기능 삭제
 	$(".fc-day-number").removeAttr("data-goto");
 
+	// 텍스트 컬러 수정
+	$(".colorSelect").change(function() {
+		colorSelectMeter(this);
+	});
+	colorSelectMeter(this);
 
 });

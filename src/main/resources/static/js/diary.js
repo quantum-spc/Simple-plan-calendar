@@ -185,3 +185,8 @@ function checkLoginInput() {
 function refreshEventBox() {
 	location.reload();
 }
+
+/** 텍스트 컬러 수정 */
+const colorSelectMeter = (that) => {
+	$("#colorSelectMeter").attr("value", $("option:selected", that).attr("meter"));
+}

@@ -38,7 +38,11 @@
 <div id='wrap'>
 
 	<div id='external-events'>
-		<h4 style="font-weight:bold;">일정 <a href="javascript:alert('일정을 드래그 앤 드롭하여 달력에 놓으면 추가됩니다.');">추가</a>&<a href="javascript:alert('일정을 드래그 앤 드롭하여 이곳에 가져오면 삭제됩니다.');">삭제</a></h4>
+		<h4 style="font-weight:bold;">일정
+			<a href="javascript:alert('일정을 드래그 앤 드롭하여 달력에 놓으면 추가됩니다.');">추가</a>
+			&
+			<a href="javascript:alert('일정을 드래그 앤 드롭하여 이곳에 가져오면 삭제됩니다.');">삭제</a>
+		</h4>
 		<div class="fc-event-group">
 			<div class='fc-event' th:text="#{calendar.event.name}" bg_color="#3a87ad" text_color="white" style="background-color:#3a87ad; color:white;"></div>
 			<div class='fc-event' th:text="#{calendar.event.name}" bg_color="black" text_color="white" style="background-color:black; color:white;"></div>
@@ -81,12 +85,13 @@
 					<input type="text" id="titleValue" name="titleValue" style="width:90%" onkeypress="if (event.keyCode == 13) putTitleUpdate();" />
 				</div><br />
 				<div style="width:90%; text-align:left; padding-left:30px;">
-					<span style="font-weight:bold;" th:text="#{calendar.bg.color.main}"></span>
-					<select class="colorSelect" name="colorSelect">
-						<option value="default" th:text="#{calendar.bg.color.default}"></option>
-						<option value="black" th:text="#{calendar.bg.color.black}"></option>
-						<option value="red" th:text="#{calendar.bg.color.red}"></option>
+					<kbd th:text="#{calendar.bg.color.main}"></kbd>
+					<select class="colorSelect" name="colorSelect" style="position: relative; top: 1px; left: 5px">
+						<option value="default" meter="3" th:text="#{calendar.bg.color.default}"></option>
+						<option value="black" meter="6" th:text="#{calendar.bg.color.black}"></option>
+						<option value="red" meter="9" th:text="#{calendar.bg.color.red}"></option>
 					</select>
+					<meter id="colorSelectMeter" min="0" max="9" style="float: right"></meter>
 				</div>
 			</div>
 			<div class="modal-footer">
