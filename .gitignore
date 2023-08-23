@@ -37,3 +37,4 @@ out/
 #src/main/resources/application.properties
 src/main/resources/jasyptPassword.properties
 out/
+application_log/
